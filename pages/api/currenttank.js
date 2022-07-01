@@ -5,12 +5,11 @@ const handler = nextConnect();
 
 handler.use(middleware);
 
-handler.post(async (req, res) => {
+handler.get(async (req, res) => {
 
-    let data = req.body;
-    data = JSON.parse(data);
+    const query = { _id: '62b2f12e48aa5c8c088970d8' }
 
-    let doc = await req.db.collection('transaction').insertOne(data)
+    let doc = await req.db.collection('branch').findOne()
     res.json(doc);
 });
 

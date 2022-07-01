@@ -22,6 +22,35 @@ import { useState, useEffect } from 'react';
 import SummaryCard from "./summarycard";
 
 export default function SaleForm(props) {
+
+  // Post Sales 
+  const updateSales = async () => {
+    
+
+    const userObj = {
+      customer: formik.values.customer,
+      kg: [
+        ...summary
+      ],
+      payment: formik.values.payment
+
+    }
+
+    const res = await fetch('http://localhost:3000/api/postsales', {
+      method: 'post',
+      body: JSON.stringify(userObj),
+    }).then(
+      toast({
+        title: 'Sales Added.',
+        description: "New Sale Added.",
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      })
+    )
+  }
+
+
   // Use Toast Component
   const toast = useToast();
 
@@ -32,13 +61,16 @@ export default function SaleForm(props) {
 );
 
 // Cart
-    const cart = [];
-    const [summary, setSummary] = useState([{kg: '', amount: ''}])
+    const [cart, setCart] = useState([]);
+    const [summary, setSummary] = useState([])
 
     const handleSummary = () => {
+      let intKg = parseInt(formik.values.selectkg);
+      let intamount = parseInt(formik.values.amount);
+
       setSummary((summary) => [
         ...summary,
-        {kg: formik.values.selectkg, amount: formik.values.amount}
+        {kg: formik.values.selectkg, amount: formik.values.amount, total: intKg * intamount }
     ]);
 
     toast({
@@ -73,6 +105,17 @@ export default function SaleForm(props) {
     
 
   let priceperkg = props.sales
+
+  //Refactor to State
+  // Compute Total Kg
+  const addDuration = arr => {
+    let res = 0;
+    for(let i = 0; i < arr.length; i++){
+       res += arr[i].total;
+    };
+    return res;
+ };
+
   const formik = useFormik({
     initialValues: {
       customer: "",
@@ -87,7 +130,7 @@ export default function SaleForm(props) {
 
       },
       cart: [
-        ...summary
+        {...summary}
       ]
 
       
@@ -95,6 +138,13 @@ export default function SaleForm(props) {
 
     },
     onSubmit: (values) => {
+      /*
+      setCart((cart) => [
+        ...summary,
+        {kg: formik.values.selectkg, amount: formik.values.amount}
+    ]); */
+    updateSales();
+
       alert(JSON.stringify(values, null, 2));
       // Price Per Kg Prop
       console.log(parseInt(formik.values.selectkg) * props.sales);
@@ -102,6 +152,7 @@ export default function SaleForm(props) {
         {...formik.values},
         {...summary}
       ]
+      alert(JSON.stringify(summary, null, 2));
       console.log(summary);
       console.log(total);
     }
@@ -223,14 +274,14 @@ export default function SaleForm(props) {
 
 
             <Button type="submit" colorScheme="purple" width="full">
-              Login
+              Post Sales
             </Button>
           </VStack>
           <Divider/>
         </form>
       </Box>
 
-      <Box p={6} bg="white" w="500px" height="300px" rounded="md">
+      <Box p={6} bg="white" w="500px" rounded="md">
           <Stack spacing={1}>
               <Heading size="md" >Summary</Heading>
               <Text color={'grey.500'}>Sales Summary</Text>
@@ -240,6 +291,11 @@ export default function SaleForm(props) {
                 {sidebar}
                 </Flex>
                 
+              </VStack>
+              <Divider my={4} orientation='horizontal' />
+              <VStack my={4}>
+                <Text color={'grey.500'}>Total</Text>
+                <Heading size="md">{addDuration(summary) * props.sales}</Heading>
               </VStack>
               
       </Box>

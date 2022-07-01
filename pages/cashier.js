@@ -73,11 +73,15 @@ const Cashier = () => {
             <Stat type="Sales Count" statvalue="50" />
         </Box>
         <Box className='sale-form'>
-            <Flex className='ppkg'>
+            <Flex mx={4} align="left" justify="left">
+                <Box w='500px'>
+                <VStack spacing={1} align="left" className='ppkg'>
                 <SelectCategory onchange={handleCategoryChange}></SelectCategory>
                 <PricePerKg category={category} price={ppkg}></PricePerKg>
+            </VStack>
+                </Box>
             </Flex>
-            <Internal ppkg={ppkg}></Internal>
+            
             {/* Commented Out
             <Box display="flex" className='kgs'>
                  <Kilogram flex="1" margin={2}></Kilogram>

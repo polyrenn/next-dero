@@ -32,11 +32,11 @@ interface LinkItemProps {
   location: string;
 }
 const LinkItems: Array<LinkItemProps> = [
-  { name: 'Sales', icon: FiHome, location: 'index' },
-  { name: 'Branch', icon: FiTrendingUp, location: 'cashier' },
+  { name: 'Sales', icon: FiHome, location: 'sales' },
+  { name: 'Branch', icon: FiTrendingUp, location: 'branch' },
   { name: 'Prices', icon: FiCompass, location: 'prices' },
-  { name: 'Favourites', icon: FiStar, location: 'index' },
-  { name: 'Settings', icon: FiSettings, location: 'index' },
+  { name: 'Favourites', icon: FiStar, location: '#' },
+  { name: 'Settings', icon: FiSettings, location: '#' },
 ];
 
 export default function SimpleSidebar({ children }: { children: ReactNode }) {

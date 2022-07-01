@@ -51,7 +51,7 @@ import {
         onSubmit: (values) => {
 
           alert(JSON.stringify(values, null, 2));
-          handlePriceUpdate();
+          //handlePriceUpdate();
         }
       });
     return (
@@ -77,17 +77,17 @@ import {
               px={3}
               color={'green.500'}
               rounded={'full'}>
-              Update Price
+              Update Tank
             </Text>
             <Stack direction={'row'} align={'center'} justify={'center'}>
-              <Text color={'gray.500'}>Now Updating Price</Text>
+              <Text color={'gray.500'}>Now Updating Tank</Text>
             </Stack>
           </Stack>
 
           <form onSubmit={formik.handleSubmit}>
           <VStack spacing={4} align="flex-start">
           <FormControl>
-              <FormLabel color={'gray.500'} htmlFor="price">Price Per Kg</FormLabel>
+              <FormLabel color={'gray.500'} htmlFor="price">Tank</FormLabel>
               <Input
                 id="price"
                 name="price"
@@ -100,20 +100,19 @@ import {
             </FormControl>
 
             <FormControl>
-              <FormLabel color={'gray.500'} htmlFor="category">Category</FormLabel>
+              <FormLabel color={'gray.500'} htmlFor="category">Select Tank</FormLabel>
               <Select
                 id="category"
                 name="category"
                 onChange={formik.handleChange}
                 h="56px"
-                placeholder="Category"
+                placeholder="Tank"
           >
-            <option value="domestic">Domestic</option>
-            <option value="eatery">Eatery</option>
-            <option value="dealer">Dealer</option>
-            <option value="hotel">Hotel</option>
+            <option value="domestic">Tank A</option>
+            <option value="eatery">Tank B</option>
           </Select>
             </FormControl>
+
             
 
             
