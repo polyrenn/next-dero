@@ -55,7 +55,7 @@ export default function SaleForm(props) {
   const toast = useToast();
 
   // Loop & Get Kilograms
-  let kgs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  let kgs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 12.5, 15, 20, 25, 50];
   const listItems = kgs.map((kg) =>
   <option key={kg.toString()} value={kg}>{kg} Kg</option>
 );
@@ -70,7 +70,7 @@ export default function SaleForm(props) {
 
       setSummary((summary) => [
         ...summary,
-        {kg: formik.values.selectkg, amount: formik.values.amount, total: intKg * intamount }
+        {kg: formik.values.selectkg, amount: formik.values.amount, total: Math.ceil(intKg * intamount) }
     ]);
 
     toast({
