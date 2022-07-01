@@ -29,7 +29,7 @@ import {
         category: formik.values.category
       }
   
-      const res = await fetch('http://localhost:3000/api/updateprice', {
+      const res = await fetch('/api/updateprice', {
       method: 'post',
       body: JSON.stringify(userObj),
     }).then(

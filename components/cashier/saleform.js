@@ -36,7 +36,7 @@ export default function SaleForm(props) {
 
     }
 
-    const res = await fetch('http://127.0.0.1:3000/api/postsales', {
+    const res = await fetch('/api/postsales', {
       method: 'post',
       body: JSON.stringify(userObj),
     }).then(
