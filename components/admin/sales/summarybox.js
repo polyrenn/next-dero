@@ -41,7 +41,7 @@ function SummaryBox(props)  {
     <Box my={8} px={4} className='summary' border="1px" borderColor="#efefef">
               <VStack my={4}>
                 <Text>Total Sold</Text>
-                <Text>NGN 300000</Text>
+                <Text>NGN {totalSums.totalvalue}</Text>
               </VStack>
               <Box py={8} bg="#fafafa" my={4} align="center" display="flex" width="full">
                 <Box flex={1}>

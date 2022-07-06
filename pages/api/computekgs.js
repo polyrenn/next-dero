@@ -23,15 +23,6 @@ handler.get(async (req, res) => {
         }, {
           $group : {
             _id : null, 
-            totalTransfer : {
-              $sum: '$payment.transfer'
-            },
-            totalCash : {
-                $sum: '$payment.cash'
-            },
-            totalPos : {
-                $sum: '$payment.pos'
-            },
             kgsold: {
                 $sum: '$totalkg'
             },

@@ -35,8 +35,12 @@ const Sales = () => {
     }
 
     const { data, error } = useSWR('api/price', fetcher);
+    //const {stat, err} = useSWR("api/computekgs", fetcher)
+
+
 
     if (!data) return <div>Loading...</div>
+  
   
     let customer = data;
     let tank;
@@ -46,7 +50,7 @@ const Sales = () => {
     } else {
       stock = data.tanks.tanka
     }
-
+   // let stats = stat[0];
     return(
         <div>
             <Head title="Sales" />
@@ -66,11 +70,12 @@ const Sales = () => {
                 h="56px"
                 onChange={handleChange}
               />
+              
               <Box display="flex" direction="column" className='stats'>
                 <Stat type="Balance Stock" statvalue={stock} suffix="Kg" />
-                <Stat type="Kg Sold" statvalue="100" suffix="Kg" />
-                <Stat type="Opening Stock" statvalue="12500" suffix="Kg" />
-                <Stat type="Sales Count" statvalue="50" />
+                <Stat type="Kg Sold" statvalue="" suffix="Kg" />
+                <Stat type="Opening Stock" statvalue="20000" suffix="Kg" />
+                <Stat type="Sales Count" statvalue="" />
              </Box>
 
               <SummaryBox date={chakraDate}></SummaryBox>
