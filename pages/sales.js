@@ -23,14 +23,28 @@ import SalesTable from '../components/admin/sales/salestable';
 import SalesNav from '../components/nav/salesnav';
 import SummaryBox from '../components/admin/sales/summarybox';
 
-
+const fetcher = (...args) => fetch(...args).then((res) => res.json())
 const Sales = () => {
+
     const today = new Date();
     const [startDate, setStartDate] = useState(new Date());
     const [chakraDate, setChakraDate] = useState();
     const adate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     const handleChange = (event) => {
       setChakraDate(event.target.value)
+    }
+
+    const { data, error } = useSWR('api/price', fetcher);
+
+    if (!data) return <div>Loading...</div>
+  
+    let customer = data;
+    let tank;
+    let stock;
+    if(data.currenttank == 'Tank B') {
+      stock = data.tanks.tankb
+    } else {
+      stock = data.tanks.tanka
     }
 
     return(
@@ -53,7 +67,7 @@ const Sales = () => {
                 onChange={handleChange}
               />
               <Box display="flex" direction="column" className='stats'>
-                <Stat type="Balance Stock" statvalue="12345" suffix="Kg" />
+                <Stat type="Balance Stock" statvalue={stock} suffix="Kg" />
                 <Stat type="Kg Sold" statvalue="100" suffix="Kg" />
                 <Stat type="Opening Stock" statvalue="12500" suffix="Kg" />
                 <Stat type="Sales Count" statvalue="50" />
