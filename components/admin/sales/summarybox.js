@@ -19,7 +19,9 @@ function SummaryBox(props)  {
     let date = props.date
 
     if(date == undefined) {
-        date = '2022-07-05'
+        date = new Date().toISOString().split('T')[0];
+        console.log(date);
+       
     }
   
 
