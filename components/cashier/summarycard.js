@@ -49,7 +49,9 @@ import React from 'react';
                 <Text>
                     Address
                 </Text>
-                <Heading size="sm">Company Address, Benin City</Heading>
+                <Heading size="sm">31 Uribi Street, Iya-Ero, Benin City</Heading>
+                <Text fontWeight={500}>DeroGas</Text>
+                <Text fontWeight={500}>08116014643</Text>
             </VStack>
             
     </Box>
