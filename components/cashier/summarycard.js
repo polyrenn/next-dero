@@ -7,13 +7,16 @@ import React from 'react';
     const sidebar = (
         
           summary.map((item) =>
-          <Box>
-            <HStack my={4} h="48px" px={8} justify="space-between" bg="#fafafa" key={item.kg}>
+          <Box key={item.kg}>
+            <HStack my={4} h="48px" px={8} justify="space-between" bg="#fafafa" >
              
-              <Text fontWeight={700}>{item.amount}x</Text>
-              <Text fontWeight={700} key={item.kg}>
+              <Text fontWeight={500}>{item.amount}x</Text>
+              <Text fontWeight={500} key={item.kg}>
+                
               {item.kg} Kg
             </Text>
+
+          <Text fontWeight={700}> Total {item.amount * item.kg} KG</Text>
             
            
             </HStack>
