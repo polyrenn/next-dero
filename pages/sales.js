@@ -21,23 +21,37 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import SalesTable from '../components/admin/sales/salestable';
 import SalesNav from '../components/nav/salesnav';
+import SummaryBox from '../components/admin/sales/summarybox';
 
 
 const Sales = () => {
     const today = new Date();
     const [startDate, setStartDate] = useState(new Date());
+    const [chakraDate, setChakraDate] = useState();
     const adate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    const handleChange = (event) => {
+      setChakraDate(event.target.value)
+    }
 
     return(
         <div>
             <Head title="Sales" />
               <SalesNav></SalesNav>
               <VStack mx={4} align='left' spacing={4}>
-                <Text> Showing Sales For {adate}</Text>
-                <Box>
-                <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
-                </Box>
+                <Text> Showing Sales For {chakraDate}</Text>
+                <HStack>
+                
+                </HStack>
               </VStack>
+              <Input
+                id="date"
+                name="date"
+                width="300px"
+                type="date"
+                variant="outline"
+                h="56px"
+                onChange={handleChange}
+              />
               <Box display="flex" direction="column" className='stats'>
                 <Stat type="Balance Stock" statvalue="12345" suffix="Kg" />
                 <Stat type="Kg Sold" statvalue="100" suffix="Kg" />
@@ -45,8 +59,10 @@ const Sales = () => {
                 <Stat type="Sales Count" statvalue="50" />
              </Box>
 
+              <SummaryBox date={chakraDate}></SummaryBox>
+
              <Box>
-                <SalesTable></SalesTable>
+                <SalesTable date={chakraDate} handleChange={handleChange}></SalesTable>
              </Box>
 
         </div>

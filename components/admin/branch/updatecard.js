@@ -7,6 +7,7 @@ import {
     List,
     FormControl,
     FormLabel,
+    FormHelperText,
     Input,
     Checkbox,
     ListItem,
@@ -21,37 +22,55 @@ import {
   export default function UpdateCard() {
     const toast = useToast();
 
-    const handlePriceUpdate = async () => {
+    const handleStockUpdate = async () => {
     
 
       const userObj = {
-        price: parseInt(formik.values.price),
-        category: formik.values.category
+        kg: parseInt(formik.values.kg),
+        tank: formik.values.tank,
+        value: parseInt(formik.values.amount),
+        date: formik.values.date
       }
   
-      const res = await fetch('/api/updateprice', {
+      const res = await fetch('/api/addstock', {
       method: 'post',
       body: JSON.stringify(userObj),
     }).then(
-      toast({
-        title: 'Price Updated.',
-        description: "Price Updated Successfully.",
-        status: 'success',
-        duration: 3000,
-        isClosable: true,
-      })
+        (res) => {
+
+            if(res.ok) {
+                toast({
+                    title: 'Stock Updated.',
+                    description: "Stock Updated Successfully.",
+                    status: 'success',
+                    duration: 3000,
+                    isClosable: true,
+                  })
+            } else {
+                toast({
+                    title: 'Error',
+                    description: "An Error Has Occured.",
+                    status: 'error',
+                    duration: 3000,
+                    isClosable: true,
+                  })
+            }
+            
+        }
     )
     }
 
     const formik = useFormik({
         initialValues: {
-          price: "",
-          category: ""
+          kg: "",
+          amount: "",
+          tank: "",
+          date: ""
         },
         onSubmit: (values) => {
 
           alert(JSON.stringify(values, null, 2));
-          //handlePriceUpdate();
+          handleStockUpdate();
         }
       });
     return (
@@ -87,31 +106,61 @@ import {
           <form onSubmit={formik.handleSubmit}>
           <VStack spacing={4} align="flex-start">
           <FormControl>
-              <FormLabel color={'gray.500'} htmlFor="price">Tank</FormLabel>
+              <FormLabel color={'gray.500'} htmlFor="price">Kg Value</FormLabel>
               <Input
-                id="price"
-                name="price"
+                id="kg"
+                name="kg"
                 type="number"
                 variant="filled"
                 h="56px"
                 onChange={formik.handleChange}
-                value={formik.values.price}
+                value={formik.values.kg}
               />
+            </FormControl>
+
+            <FormControl>
+              <FormLabel color={'gray.500'} htmlFor="price">Stock Value</FormLabel>
+              <Input
+                id="amount"
+                name="amount"
+                type="number"
+                variant="filled"
+                h="56px"
+                onChange={formik.handleChange}
+                value={formik.values.amount}
+              />
+              <FormHelperText>Total Stock Value ( in NGN )</FormHelperText>
             </FormControl>
 
             <FormControl>
               <FormLabel color={'gray.500'} htmlFor="category">Select Tank</FormLabel>
               <Select
-                id="category"
-                name="category"
+                id="tank"
+                name="tank"
                 onChange={formik.handleChange}
                 h="56px"
                 placeholder="Tank"
+                value={formik.values.tank}
           >
-            <option value="domestic">Tank A</option>
-            <option value="eatery">Tank B</option>
+            <option value="Tank A">Tank A</option>
+            <option value="Tank B">Tank B</option>
           </Select>
             </FormControl>
+
+            <FormControl>
+              <FormLabel color={'gray.500'} htmlFor="date">Date</FormLabel>
+              <Input
+                id="date"
+                name="date"
+                type="date"
+                variant="outline"
+                h="56px"
+                onChange={formik.handleChange}
+                value={formik.values.date}
+              />
+            </FormControl>
+
+            
 
             
 

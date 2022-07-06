@@ -7,11 +7,47 @@ handler.use(middleware);
 
 handler.get(async (req, res) => {
 
-    const query = { quantity: 2 }
+    // Return Current Dates Sales if no date passed
 
-    let doc = await req.db.collection('transaction').findOne(query)
+   
+    
+
+    let date = req.query.date
+  
+    if(date == undefined) {
+        date = new Date()
+    }
+
+    let replace = `/^${date}/`
+    let re = new RegExp(replace);
+    const query = { date:  new RegExp(`^${date}`) }
+
+    let doc = await req.db.collection('transaction').find(query).toArray();
     console.log(doc);
+    console.log(req.query.date);
     res.json(doc);
+    
+
+
+     // Total Kg Sold
+     /*
+    let aggregate = [
+        {
+          $group: {
+            _id: null,
+            totalQty: { $sum: '$totalkg' },
+          },
+        },
+        { $project: { _id: 0 } },
+      ]
+    
+    
+    const aggCursor =  await req.db.collection('transaction').aggregate(aggregate).toArray()
+    
+        console.log(aggCursor);
+        res.json(aggCursor);
+    */    
+    
 });
 
 export default handler;

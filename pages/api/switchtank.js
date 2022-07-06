@@ -5,28 +5,32 @@ const handler = nextConnect();
 
 handler.use(middleware);
 
+
 handler.post(async (req, res) => {
 
     let data = req.body;
     data = JSON.parse(data);
+    let currtank = data.currenttank;
+
     let newValues;
-    let totalkg = data.totalkg
-    let currtank = data.currenttank
 
     if(currtank == 'Tank A') {
-        newValues = { $inc: { 'tanks.tanka': -totalkg }};
+        newValues = { $set: { 'currenttank': 'Tank B' }};
     }
 
     if(currtank == 'Tank B') {
-        newValues = { $inc: { 'tanks.tankb': -totalkg }};
+        newValues = { $set: { 'currenttank': 'Tank A' }};
     }
 
+   
+
+  
     const query = { name: 'Dero' };
 
-    let doc = await req.db.collection('transaction').insertOne(data);
-    let updatekg = await req.db.collection('branch').updateOne(query, newValues);
-   
-    res.json(doc);
+    let result = await req.db.collection('branch').updateOne( query, newValues);
+    res.json(result);
 });
+
+
 
 export default handler;

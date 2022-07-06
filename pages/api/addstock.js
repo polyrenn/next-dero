@@ -10,23 +10,20 @@ handler.post(async (req, res) => {
     let data = req.body;
     data = JSON.parse(data);
     let newValues;
-    let totalkg = data.totalkg
-    let currtank = data.currenttank
-
-    if(currtank == 'Tank A') {
-        newValues = { $inc: { 'tanks.tanka': -totalkg }};
+    let totalkg = data.kg
+    let tank = data.tank;
+    if(tank == 'Tank A') {
+        newValues = { $set: { 'tanks.tanka': totalkg }};
+    } else if(tank == 'Tank B') {
+        newValues = { $set: { 'tanks.tankb': totalkg }};
     }
-
-    if(currtank == 'Tank B') {
-        newValues = { $inc: { 'tanks.tankb': -totalkg }};
-    }
-
+  
     const query = { name: 'Dero' };
 
-    let doc = await req.db.collection('transaction').insertOne(data);
     let updatekg = await req.db.collection('branch').updateOne(query, newValues);
+    let addstock = await req.db.collection('stock').insertOne(data);
    
-    res.json(doc);
+    res.json(updatekg);
 });
 
 export default handler;

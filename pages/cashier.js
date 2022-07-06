@@ -24,10 +24,13 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json())
 const Cashier = () => {
     const { data, error } = useSWR('/api/price', fetcher);
     
-    // Price Per Kg & Category States
+    // Price Per Kg & Category States, Current Tank
     const [ppkg, setPpkg] = useState();
     const [category, setCatgory] = useState();
+    const [currenttank, setCurrentTank] = useState();
     let price;
+
+    
 
     //Update Global Price State
 
@@ -38,7 +41,12 @@ const Cashier = () => {
             const {domestic, dealer, eatery, hotel} = data.priceperkg;
             setPpkg(ppkg = domestic);
         }
-       
+        
+        if(data) {
+            setCurrentTank(data.currenttank);
+        }
+        
+           
       
       });
 
@@ -90,7 +98,7 @@ const Cashier = () => {
             </Box>
 */}
             <Box className='sale'>
-                <SaleForm sales={ppkg}></SaleForm>
+                <SaleForm currenttank={currenttank} category={category} sales={ppkg}></SaleForm>
             </Box>
         </Box>
     </Box>

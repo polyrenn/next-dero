@@ -38,6 +38,7 @@ function SelectCategory(props) {
             <Select
             width="auto"
             onChange={props.onchange}
+            placeholder="Category"
           >
             <option value="Domestic">Domestic</option>
             <option value="Dealer">Dealer</option>

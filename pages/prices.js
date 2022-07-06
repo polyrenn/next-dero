@@ -44,11 +44,11 @@ export default () => {
             </div>
             
         <Box margin={0} className='main'>
-        <Box display="flex" flow="column" direction="column" className='stats'>
-            <PricePerKg category="Domestic"></PricePerKg>
-            <PricePerKg category="Dealer"></PricePerKg>
-            <PricePerKg category="Eatery"></PricePerKg>
-            <PricePerKg category="Hotel"></PricePerKg>
+        <Box display="flex" direction="column" className='stats'>
+            <PricePerKg flex={1} category="Domestic"></PricePerKg>
+            <PricePerKg flex={1}  category="Dealer"></PricePerKg>
+            <PricePerKg flex={1} category="Eatery"></PricePerKg>
+            <PricePerKg flex={1} category="Hotel"></PricePerKg>
         </Box>
         <Box>
         <Test></Test>
