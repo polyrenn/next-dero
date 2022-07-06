@@ -10,13 +10,11 @@ handler.get(async (req, res) => {
     // Return Current Dates Sales if no date passed
 
    
+    let date;
     
-
-    let date = req.query.date
-  
-    if(date == undefined) {
-        date = new Date()
-    }
+    date = req.query.date
+ 
+    
 
     let replace = `/^${date}/`
     let re = new RegExp(replace);
@@ -25,6 +23,7 @@ handler.get(async (req, res) => {
     let doc = await req.db.collection('transaction').find(query).toArray();
     console.log(doc);
     console.log(req.query.date);
+    console.log(date);
     res.json(doc);
     
 

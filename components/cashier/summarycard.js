@@ -51,7 +51,7 @@ import React from 'react';
                 </Text>
                 <Heading size="sm">31 Uribi Street, Iya-Ero, Benin City</Heading>
                 <Text fontWeight={500}>DeroGas</Text>
-                <Text fontWeight={500}>08116014643</Text>
+                <Text fontWeight={500}>08116014643</Text> 
             </VStack>
             
     </Box>

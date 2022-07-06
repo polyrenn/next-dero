@@ -20,6 +20,11 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json())
 function SalesTable(props)  {
 
     let date = props.date
+    if(date == undefined) {
+      date = new Date().toISOString().split('T')[0];
+      console.log(date);
+     
+    }
   
 
   
