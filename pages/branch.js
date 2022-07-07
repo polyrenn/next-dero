@@ -19,6 +19,7 @@ import useSWR from 'swr';
 import axios from 'axios';
 import CurrentTank from '../components/admin/branch/currenttank';
 import { useState, useEffect } from 'react';
+import TopUp from '../components/admin/branch/topup';
 
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
@@ -109,6 +110,7 @@ export default () => {
         <Box>
         <Test></Test>
             <UpdateCard></UpdateCard>
+            <TopUp></TopUp>
         </Box>
     </Box>
     

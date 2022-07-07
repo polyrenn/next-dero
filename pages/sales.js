@@ -22,6 +22,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import SalesTable from '../components/admin/sales/salestable';
 import SalesNav from '../components/nav/salesnav';
 import SummaryBox from '../components/admin/sales/summarybox';
+import StatBlock from '../components/cashier/statblock';
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 const Sales = () => {
@@ -34,21 +35,22 @@ const Sales = () => {
       setChakraDate(event.target.value)
     }
 
-    const { data, error } = useSWR('api/price', fetcher);
+    const { data: price, error: priceError } = useSWR('api/price', fetcher);
+    const { data: stat, error: StatError } = useSWR('api/mon', fetcher);
     //const {stat, err} = useSWR("api/computekgs", fetcher)
 
 
 
-    if (!data) return <div>Loading...</div>
+    if (!price) return <div>Loading...</div>
   
   
-    let customer = data;
+    let customer = price;
     let tank;
     let stock;
-    if(data.currenttank == 'Tank B') {
-      stock = data.tanks.tankb
+    if(price.currenttank == 'Tank B') {
+      stock = price.tanks.tankb
     } else {
-      stock = data.tanks.tanka
+      stock = price.tanks.tanka
     }
    // let stats = stat[0];
     return(
@@ -70,13 +72,7 @@ const Sales = () => {
                 h="56px"
                 onChange={handleChange}
               />
-              
-              <Box display="flex" direction="column" className='stats'>
-                <Stat type="Balance Stock" statvalue={stock} suffix="Kg" />
-                <Stat type="Kg Sold" statvalue="" suffix="Kg" />
-                <Stat type="Opening Stock" statvalue="20000" suffix="Kg" />
-                <Stat type="Sales Count" statvalue="" />
-             </Box>
+              <StatBlock branch={price}></StatBlock>
 
               <SummaryBox date={chakraDate}></SummaryBox>
 

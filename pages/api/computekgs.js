@@ -8,11 +8,11 @@ handler.use(middleware);
 handler.get(async (req, res) => {
 
     // Return Current Dates Sales if no date passed
-    
+    // Return Bal
 
 
     let date = req.query.date
-     
+    date = new Date().toISOString().split('T')[0] 
      
 
     let aggregate = [
@@ -20,7 +20,8 @@ handler.get(async (req, res) => {
           $match: {
             date:  new RegExp(`^${date}`)
           }
-        }, {
+        },
+        {
           $group : {
             _id : null, 
             kgsold: {
@@ -28,13 +29,15 @@ handler.get(async (req, res) => {
             },
             totalvalue: {
                 $sum: '$totalvalue'
-            }  
+            },
+           
           }
         }, {
           $project: {
             _id: 0
           }
         }
+       
       ]
     
     

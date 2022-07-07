@@ -16,19 +16,29 @@ import SelectCategory from '../components/cashier/selectcat';
 import { useState, useEffect } from 'react';
 import useSWR from 'swr';
 import Internal from '../components/internal';
+import StatBlock from '../components/cashier/statblock';
+import SummaryBox from '../components/admin/sales/summarybox';
+import { useToast } from '@chakra-ui/react';
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 
 
 const Cashier = () => {
+    const toast = useToast();
+
     const { data, error } = useSWR('/api/price', fetcher);
     
     // Price Per Kg & Category States, Current Tank
     const [ppkg, setPpkg] = useState();
     const [category, setCatgory] = useState();
     const [currenttank, setCurrentTank] = useState();
+    const [branch, setBranch] = useState();
+    const [isSettingStock, setIsSettingStock] = useState(false);
     let price;
+
+    let date
+    date = new Date().toISOString().split('T')[0] 
 
     
 
@@ -44,12 +54,13 @@ const Cashier = () => {
         
         if(data) {
             setCurrentTank(data.currenttank);
+            setBranch(data)
         }
         
            
       
       });
-
+     console.log(branch);
 
     const handleCategoryChange = (e) => {
         const {domestic, dealer, eatery, hotel} = data.priceperkg;
@@ -69,17 +80,55 @@ const Cashier = () => {
         setCatgory(e.target.value);
         console.log(e.target.value);
     }
+
+    // Handle Opening Stock
+    let userObj; 
+
+  const handleSetStock = async () => {
+    if(currenttank == 'Tank A') {
+        userObj = {
+            balance: branch.tanks.tanka
+        }
+    } else {
+        userObj = {
+            balance: branch.tanks.tankb
+        }
+    }
+    
+    console.log(userObj);
+    
+
+    const res = await fetch('/api/open', {
+      method: 'post',
+      body: JSON.stringify(userObj),
+    },
+    setIsSettingStock(true)
+    ).then(
+      toast({
+        title: 'Opening Stock Set.',
+        description: "Opening Stock Set Successfully.",
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      }),
+      setIsSettingStock(false)
+    )
+  }
+
+
     return (
         <div>
     <Head title="Home" />
     <Simple />
     <Box margin={0} className='main'>
-        <Box display="flex" direction="column" className='stats'>
-            <Stat type="Balance Stock" statvalue="12345" suffix="Kg" />
-            <Stat type="Kg Sold" statvalue="100" suffix="Kg" />
-            <Stat type="Opening Stock" statvalue="12500" suffix="Kg" />
-            <Stat type="Sales Count" statvalue="50" />
-        </Box>
+        <VStack my={8}>
+            {isSettingStock ?  <Button isLoading onClick={handleSetStock}>Set Opening Stock</Button> : 
+                 <Button onClick={handleSetStock}>Set Opening Stock</Button>
+            }
+           
+        </VStack>
+        <StatBlock branch={branch} balanceStock=""></StatBlock>
+        <SummaryBox date={date}></SummaryBox>
         <Box className='sale-form'>
             <Flex mx={4} align="left" justify="left">
                 <Box w='500px'>
@@ -89,6 +138,8 @@ const Cashier = () => {
             </VStack>
                 </Box>
             </Flex>
+
+          
             
             {/* Commented Out
             <Box display="flex" className='kgs'>

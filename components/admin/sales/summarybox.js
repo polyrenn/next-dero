@@ -41,22 +41,22 @@ function SummaryBox(props)  {
     <Box my={8} px={4} className='summary' border="1px" borderColor="#efefef">
               <VStack my={4}>
                 <Text>Total Sold</Text>
-                <Text>NGN {totalSums.totalvalue}</Text>
+                <Text>NGN {totalSums == undefined ? '' : totalSums.totalvalue}</Text>
               </VStack>
               <Box py={8} bg="#fafafa" my={4} align="center" display="flex" width="full">
                 <Box flex={1}>
                   <Text>Transfer</Text>
-                  <Text>NGN {totalSums.totalTransfer}</Text>
+                  <Text>NGN {totalSums == undefined ? '' : totalSums.totalTransfer}</Text>
                 </Box>
 
                 <Box flex={1}>
                   <Text>Cash</Text>
-                  <Text>NGN {totalSums.totalCash}</Text>
+                  <Text>NGN {totalSums == undefined ? '' : totalSums.totalCash}</Text>
                 </Box>
 
                 <Box flex={1}>
                   <Text>Pos</Text>
-                  <Text>NGN {totalSums.totalPos}</Text>
+                  <Text>NGN {totalSums == undefined ? '' : totalSums.totalPos}</Text>
                 </Box>
                 
               </Box>
