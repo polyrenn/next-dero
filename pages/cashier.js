@@ -18,13 +18,16 @@ import useSWR from 'swr';
 import Internal from '../components/internal';
 import StatBlock from '../components/cashier/statblock';
 import SummaryBox from '../components/admin/sales/summarybox';
-import { useToast } from '@chakra-ui/react';
+import { useToast, useDisclosure } from '@chakra-ui/react';
+import SalesTable from '../components/cashier/salestable';
+
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 
 
 
 const Cashier = () => {
+    const { isOpen, onOpen, onClose } = useDisclosure()
     const toast = useToast();
 
     const { data, error } = useSWR('/api/price', fetcher);
@@ -150,6 +153,7 @@ const Cashier = () => {
             }
            
         </VStack>
+        <SalesTable></SalesTable>
         <StatBlock branch={branch} balanceStock=""></StatBlock>
         <SummaryBox date={date}></SummaryBox>
         <Box className='sale-form'>
