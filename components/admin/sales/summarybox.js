@@ -33,7 +33,11 @@ function SummaryBox(props)  {
   
   if (!data) return <div>Loading...</div>
 
-  let totalSums = data[0];   
+  let totalSums = data[0];
+  let totalCash = totalSums.totalCash
+  let totalTransfer = totalSums.totalTransfer
+  let totalPos = totalSums.totalPos
+  let totalvalue = totalSums.totalvalue
   
  
 
@@ -41,22 +45,22 @@ function SummaryBox(props)  {
     <Box my={8} px={4} className='summary' border="1px" borderColor="#efefef">
               <VStack my={4}>
                 <Text>Total Sold</Text>
-                <Text>NGN {totalSums == undefined ? '' : totalSums.totalvalue}</Text>
+                <Text>NGN {totalSums == undefined ? '' : totalvalue.toLocaleString('en-US')}</Text>
               </VStack>
               <Box py={8} bg="#fafafa" my={4} align="center" display="flex" width="full">
                 <Box flex={1}>
                   <Text>Transfer</Text>
-                  <Text>NGN {totalSums == undefined ? '' : totalSums.totalTransfer}</Text>
+                  <Text>NGN {totalSums == undefined ? '' : totalTransfer.toLocaleString('en-US')}</Text>
                 </Box>
 
                 <Box flex={1}>
                   <Text>Cash</Text>
-                  <Text>NGN {totalSums == undefined ? '' : totalSums.totalCash}</Text>
+                  <Text>NGN {totalSums == undefined ? '' : totalCash.toLocaleString('en-US')}</Text>
                 </Box>
 
                 <Box flex={1}>
                   <Text>Pos</Text>
-                  <Text>NGN {totalSums == undefined ? '' : totalSums.totalPos}</Text>
+                  <Text>NGN {totalSums == undefined ? '' : totalPos.toLocaleString('en-US')}</Text>
                 </Box>
                 
               </Box>
