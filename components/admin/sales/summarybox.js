@@ -37,7 +37,7 @@ function SummaryBox(props)  {
   let totalCash = totalSums.totalCash
   let totalTransfer = totalSums.totalTransfer
   let totalPos = totalSums.totalPos
-  let totalvalue = totalSums.totalvalue
+  let totalvalue = totalCash + totalPos + totalTransfer
   
  
 
