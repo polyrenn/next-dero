@@ -35,7 +35,7 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'Sales', icon: FiHome, location: 'sales' },
   { name: 'Branch', icon: FiTrendingUp, location: 'branch' },
   { name: 'Prices', icon: FiCompass, location: 'prices' },
-  { name: 'Favourites', icon: FiStar, location: '#' },
+  { name: 'Stock', icon: FiStar, location: 'stock' },
   { name: 'Settings', icon: FiSettings, location: '#' },
 ];
 

@@ -16,6 +16,7 @@ import SimpleSidebar from '../components/nav/adminnav';
 
 export default () => ( 
     <div>
+    <Head title="Admin"></Head>    
     <SimpleSidebar>
 
     </SimpleSidebar>
