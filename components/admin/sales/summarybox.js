@@ -34,10 +34,17 @@ function SummaryBox(props)  {
   if (!data) return <div>Loading...</div>
 
   let totalSums = data[0];
-  let totalCash = totalSums.totalCash
-  let totalTransfer = totalSums.totalTransfer
-  let totalPos = totalSums.totalPos
-  let totalvalue = totalCash + totalPos + totalTransfer
+  let totalCash;
+  let totalPos;
+  let totalTransfer;
+  let totalvalue
+  if(totalSums != undefined) {
+    totalCash = totalSums.totalCash
+    totalTransfer = totalSums.totalTransfer
+    totalPos = totalSums.totalPos
+    totalvalue = totalCash + totalPos + totalTransfer
+  }
+  
   
  
 
