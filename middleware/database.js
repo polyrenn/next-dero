@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb';
 import nextConnect from 'next-connect';
-const uri = "mongodb://localhost:27017/";
+const uri = "mongodb://dadmin:34Ether34%@localhost:27017/?authSource=admin";
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
