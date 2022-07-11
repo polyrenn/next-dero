@@ -152,14 +152,14 @@ export default function SaleForm(props) {
   const formik = useFormik({
     initialValues: {
       customer: "",
-      rememberMe: priceperkg,
+      rememberMe: true,
       checkVal: priceperkg,
       selectkg: "",
       amount: "",
       payment: {
         cash: 0,
         pos: 0,
-        transfer: 0
+        transfer: 0,
 
       },
       cart: 0
@@ -176,7 +176,7 @@ export default function SaleForm(props) {
      
       return errors;
      },
-    onSubmit: (values) => {
+    onSubmit: (values, {resetForm}) => {
       /*
       setCart((cart) => [
         ...summary,
@@ -193,6 +193,8 @@ export default function SaleForm(props) {
       alert(JSON.stringify(summary, null, 2));
       console.log(summary);
       console.log(total);
+      resetForm({
+        values: ""})
     }
 
   });
@@ -237,8 +239,9 @@ export default function SaleForm(props) {
                 type="number"
                 variant="outline"
                 h="56px"
+                min={1}
                 onChange={formik.handleChange}
-                value={formik.values.price}
+                value={formik.values.amount}
               />
             </FormControl>
             
@@ -279,7 +282,13 @@ export default function SaleForm(props) {
             <Box className="paymentcheck">
               <CheckboxGroup colorScheme='green'>
               <Stack spacing={[1, 5]} direction={['column', 'row']}>
-                <Checkbox value='cash'>Cash</Checkbox>
+                <Checkbox
+                id="rememberMe"
+                name="rememberMe"
+                onChange={formik.handleChange}
+                isChecked={formik.values.rememberMe}
+                
+                >Cash</Checkbox>
                 <Checkbox value='pos'>Pos</Checkbox>
                 <Checkbox value='transfer'>Transfer</Checkbox>
               </Stack>
@@ -294,7 +303,6 @@ export default function SaleForm(props) {
                 name="payment.cash"
                 onChange={formik.handleChange}
                 value={formik.values.payment.cash}
-              
               >
               
               </Input>

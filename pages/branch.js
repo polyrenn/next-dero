@@ -32,6 +32,7 @@ export default () => {
     const [ppkg, setPpkg] = useState();
     const [category, setCatgory] = useState();
     const [currenttank, setCurrentTank] = useState();
+    const [balance, setBalance] = useState({});
     let price;
 
     
@@ -44,8 +45,10 @@ export default () => {
         
         if(data) {
             setCurrentTank(data.currenttank);
+            setBalance(data.tanks)
         }
         
+        console.log(balance)
            
       
       });
@@ -56,7 +59,8 @@ export default () => {
     const handleSwitch = async () => {
         
         const userObj = {
-            currenttank: currenttank
+            currenttank: currenttank,
+            loss: balance
           }  
     
       const res = await fetch('/api/switchtank', {

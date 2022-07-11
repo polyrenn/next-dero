@@ -49,7 +49,7 @@ function SalesTable() {
             <Button colorScheme={'purple'} onClick={onOpen}>View Sales</Button>
         </VStack>
 
-        <Modal size="xl" isOpen={isOpen} onClose={onClose}>
+        <Modal size="full" isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Sales</ModalHeader>
@@ -66,6 +66,9 @@ function SalesTable() {
         <Th>Kg</Th>
         <Th>Category</Th>
         <Th>Tank</Th>
+        <Th>Cash</Th>
+        <Th>Pos</Th>
+        <Th>Transfer</Th>
         <Th isNumeric>Amount</Th>
       </Tr>
     </Thead>
@@ -78,6 +81,9 @@ function SalesTable() {
            <Td>{item.totalkg}</Td>
            <Td>{item.category}</Td>
            <Td>{item.currenttank}</Td>
+           <Td>{item.payment.cash}</Td>
+           <Td>{item.payment.pos}</Td>
+           <Td>{item.payment.transfer}</Td>
            <Td isNumeric>{item.totalvalue}</Td>
          </Tr>
           
@@ -97,6 +103,9 @@ function SalesTable() {
         <Th>Kg</Th>
         <Th>Category</Th>
         <Th>Tank</Th>
+        <Th>Cash</Th>
+        <Th>Pos</Th>
+        <Th>Transfer</Th>
         <Th isNumeric>Amount</Th>
       </Tr>
     </Tfoot>

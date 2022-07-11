@@ -23,6 +23,7 @@ import SalesTable from '../components/admin/sales/salestable';
 import SalesNav from '../components/nav/salesnav';
 import SummaryBox from '../components/admin/sales/summarybox';
 import StatBlock from '../components/cashier/statblock';
+import SwitchLog from '../components/switchlog';
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 const Sales = () => {
@@ -73,6 +74,7 @@ const Sales = () => {
                 onChange={handleChange}
               />
               <StatBlock branch={price}></StatBlock>
+              <SwitchLog></SwitchLog>
 
               <SummaryBox date={chakraDate}></SummaryBox>
 

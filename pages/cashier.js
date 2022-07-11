@@ -20,6 +20,7 @@ import StatBlock from '../components/cashier/statblock';
 import SummaryBox from '../components/admin/sales/summarybox';
 import { useToast, useDisclosure } from '@chakra-ui/react';
 import SalesTable from '../components/cashier/salestable';
+import SwitchLog from '../components/switchlog';
 
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
@@ -46,7 +47,7 @@ const Cashier = () => {
 
     let kgs = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 12.5, 15, 20, 25, 50];
     const listItems = kgs.map((kg) =>
-    <VStack>
+    <VStack key={kg}>
         <Text
         fontSize={'sm'}
         fontWeight={500}
@@ -56,7 +57,7 @@ const Cashier = () => {
         color={'green.500'}
         rounded={'full'}
         key={kg.toString()} value={kg}>{kg} Kg</Text>
-        <Text fontSize={'lg'}>{ppkg * kg}</Text>
+        <Text fontSize={'lg'}>{`${ppkg * kg}`}</Text>
     </VStack>
     
     );
@@ -155,6 +156,7 @@ const Cashier = () => {
         </VStack>
         <SalesTable></SalesTable>
         <StatBlock branch={branch} balanceStock=""></StatBlock>
+        <SwitchLog></SwitchLog>
         <SummaryBox date={date}></SummaryBox>
         <Box className='sale-form'>
             <Flex mx={4} align="left" justify="left">
