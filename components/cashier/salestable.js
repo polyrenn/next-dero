@@ -24,9 +24,9 @@ import {
 
   import { VStack, Button, Text, Box, useDisclosure } from '@chakra-ui/react';
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
-function SalesTable() {
+function SalesTable(props) {
     const { isOpen, onOpen, onClose } = useDisclosure()
-    let date;
+    let date = props.date
     if(date == undefined) {
       date = new Date().toISOString().split('T')[0];
       console.log(date);

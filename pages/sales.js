@@ -19,11 +19,12 @@ import Internal from '../components/internal';
 import ReactDatePicker from 'react-datepicker';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import SalesTable from '../components/admin/sales/salestable';
+//import SalesTable from '../components/admin/sales/salestable';
 import SalesNav from '../components/nav/salesnav';
 import SummaryBox from '../components/admin/sales/summarybox';
 import StatBlock from '../components/cashier/statblock';
 import SwitchLog from '../components/switchlog';
+import SalesTable from '../components/cashier/salestable';
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json())
 const Sales = () => {
