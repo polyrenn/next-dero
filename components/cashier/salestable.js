@@ -81,10 +81,10 @@ function SalesTable(props) {
            <Td>{item.totalkg}</Td>
            <Td>{item.category}</Td>
            <Td>{item.currenttank}</Td>
-           <Td>{item.payment.cash}</Td>
-           <Td>{item.payment.pos}</Td>
-           <Td>{item.payment.transfer}</Td>
-           <Td isNumeric>{item.totalvalue}</Td>
+           <Td>{item.payment.cash.toLocaleString('en-US')}</Td>
+           <Td>{item.payment.pos.toLocaleString('en-US')}</Td>
+           <Td>{item.payment.transfer.toLocaleString('en-US')}</Td>
+           <Td isNumeric>{item.totalvalue.toLocaleString('en-US')}</Td>
          </Tr>
           
         )
