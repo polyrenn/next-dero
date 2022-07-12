@@ -232,7 +232,7 @@ export default function SaleForm(props) {
             </FormControl>
 
             <FormControl>
-              <FormLabel color={'gray.500'} htmlFor="price">Amount</FormLabel>
+              <FormLabel color={'gray.500'} htmlFor="price">Quantity</FormLabel>
               <Input
                 id="amount"
                 name="amount"
@@ -370,6 +370,9 @@ export default function SaleForm(props) {
        computeTotal={computeTotal} 
        summary={summary}
        customer={formik.values.customer}
+       cash={formik.values.payment.cash}
+       pos={formik.values.payment.pos}
+       transfer={formik.values.payment.transfer}
        >
         
        </SummaryCard>
